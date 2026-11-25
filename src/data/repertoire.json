@@ -1,0 +1,50 @@
+[
+  {
+    "category": "cumbia",
+    "title": "Cumbias de Antología y Éxitos de Oro",
+    "description": "Grandes clásicos tropicales, Grupo 5, Agua Marina, Armonía 10, Los Shapis y cumbias que hacen vibrar a todas las generaciones.",
+    "icon": "disc",
+    "hits": [
+      "Motor y Motivo / Te Vas",
+      "Tu Amor Fue Una Mentira",
+      "El Casorio / El Aguajal",
+      "Cervecita Blanca / Dios Mío Haz que me Quiera"
+    ]
+  },
+  {
+    "category": "salsa",
+    "title": "Salsa & Merengue Explosivo",
+    "description": "Salsa dura, romántica y merengues de alta energía para mantener la pista de baile llena toda la noche.",
+    "icon": "flame",
+    "hits": [
+      "Mix Guarachas & Fania All Stars",
+      "La Rebelión / Cali Pachanguero",
+      "El Tiburón / Kulikitaka",
+      "La Bilirrubina / Procura"
+    ]
+  },
+  {
+    "category": "folclore",
+    "title": "Huaynos, Santiago & Folclore del Centro",
+    "description": "La auténtica identidad huancaína y del Valle del Mantaro. Santiago zapateado, huaylas y mulizas con fuerza e instrumentación viva.",
+    "icon": "music-2",
+    "hits": [
+      "Santiago Huancaíno Tradicional",
+      "Huaylas Moderno con Fuerza",
+      "Mix Chuto / Tunantada",
+      "Cantos del Mantaro"
+    ]
+  },
+  {
+    "category": "rock",
+    "title": "Rock en Español & Fiesta Variada",
+    "description": "Clásicos del rock ochentero y noventero, pop latino y música del momento para el momento cumbre del evento.",
+    "icon": "zap",
+    "hits": [
+      "Mix Soda Stereo / Enanitos Verdes",
+      "Lamento Boliviano / De Música Ligera",
+      "Mix Hombres G / Vilma Palma",
+      "Hora Loca Temática con Animación"
+    ]
+  }
+]

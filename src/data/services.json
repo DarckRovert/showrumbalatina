@@ -1,0 +1,50 @@
+[
+  {
+    "id": "matrimonios",
+    "title": "Bodas y Matrimonios de Ensueño",
+    "badge": "Más Solicitado",
+    "description": "Protocolo completo desde el ingreso de novios, vals ceremonial, ambientación musical y show bailable en vivo hasta el amanecer.",
+    "features": [
+      "Protocolo y Vals en Vivo",
+      "Animación profesional elegante",
+      "Repertorio adaptado a los novios",
+      "Show de Hora Loca interactiva"
+    ]
+  },
+  {
+    "id": "quinceaneros",
+    "title": "Quinceañeros & Fiestas de Promoción",
+    "badge": "Tendencia",
+    "description": "Energía desbordante para las quinceañeras y jóvenes. Mezcla perfecta de cumbias modernas, salsa, rock y hora loca con cotillón.",
+    "features": [
+      "Coreografías y animación dinámica",
+      "Efectos visuales e iluminación",
+      "DJ complementario en pausas",
+      "Música del momento y clásicos"
+    ]
+  },
+  {
+    "id": "patronales",
+    "title": "Fiestas Patronales & Aniversarios",
+    "badge": "Tradición Viva",
+    "description": "Presentaciones multitudinarias con sonido de alta potencia, huaynos, santiagos y cumbias para mayordomos y comités del centro del país.",
+    "features": [
+      "Sonido para exteriores y plazas",
+      "Santiago y huayno tradicional",
+      "Puntualidad y cumplimiento garantizado",
+      "Show continuo de alta resistencia"
+    ]
+  },
+  {
+    "id": "corporativos",
+    "title": "Eventos Corporativos & Empresas",
+    "badge": "Empresarial",
+    "description": "Cenas de gala, aniversarios institucionales y fiestas de fin de año con nivel sonoro controlado y máxima etiqueta.",
+    "features": [
+      "Facturación y formalidad",
+      "Música ambiental y bailable",
+      "Maestro de ceremonias opcional",
+      "Equipamiento estético y sobrio"
+    ]
+  }
+]
