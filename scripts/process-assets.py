@@ -117,7 +117,7 @@ def generate_og_image(hero_raw: Image.Image):
     draw_star(width // 2 - 282, 112, outer_r=11, inner_r=4.5)
     draw_star(width // 2 + 282, 112, outer_r=11, inner_r=4.5)
     text_shadow((width // 2, 212), "SHOW RUMBA LATINA", font_title, (255, 245, 214, 255), shadow_offset=(0, 5))
-    text_shadow((width // 2, 294), "Dir. Jesús 'Beto' Rojas Ochoa  •  +15 Años de Trayectoria", font_sub, (226, 232, 240, 255))
+    text_shadow((width // 2, 294), "Dir. Jesús Alberto Rojas Ochoa  •  +15 Años de Trayectoria", font_sub, (226, 232, 240, 255))
     text_shadow((width // 2, 378), "Cumbia  •  Salsa  •  Santiago  •  Rock  •  Boleros", font_genres, (254, 213, 66, 255))
 
     pill_w, pill_h = 840, 74

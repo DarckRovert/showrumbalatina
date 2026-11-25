@@ -1,13 +1,13 @@
 # Show Rumba Latina — Sitio Web Oficial (v2.0)
 
-Portal web de alto alcance, conversión y difusión audiovisual para la agrupación musical **Show Rumba Latina** (Huancayo, Perú), bajo la dirección de **Jesús Alberto "Beto" Rojas Ochoa**.
+Portal web de alto alcance, conversión y difusión audiovisual para la agrupación musical **Show Rumba Latina** (Huancayo, Perú), bajo la dirección de **Jesús Alberto Rojas Ochoa**.
 
 👉 **Sitio en vivo:** [https://showrumbalatina.github.io/](https://showrumbalatina.github.io/)
 
 ---
 
 ## 🎵 Información Verificada de la Agrupación
-* **Director General y Voz Principal:** Jesús Alberto "Beto" Rojas Ochoa.
+* **Director General y Voz Principal:** Jesús Alberto Rojas Ochoa.
 * **Trayectoria Documentada:** +15 años (registros verificados en YouTube desde abril de 2011).
 * **Sede y Cobertura:** Huancayo Metropolitano, Valle del Mantaro (El Tambo, Chilca, Jauja, Concepción, Chupaca), Región Junín / Selva Central y giras a nivel nacional.
 * **Contacto Directo / WhatsApp:** `+51 964 966 904`.

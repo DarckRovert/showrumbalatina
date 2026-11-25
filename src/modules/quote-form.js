@@ -26,7 +26,7 @@ function createVCardBlob() {
   const vcard = [
     'BEGIN:VCARD',
     'VERSION:3.0',
-    'FN:Show Rumba Latina - Jesús "Beto" Rojas Ochoa',
+    'FN:Show Rumba Latina - Jesús Alberto Rojas Ochoa',
     'N:Rojas Ochoa;Jesús Alberto;;;',
     'ORG:Show Rumba Latina (Grupo Musical Huancayo)',
     'TITLE:Director General y Voz Principal',
@@ -44,7 +44,7 @@ export function triggerVCardDownload() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'Show_Rumba_Latina_Beto_Rojas.vcf';
+  a.download = 'Show_Rumba_Latina_Jesus_Alberto_Rojas_Ochoa.vcf';
   document.body.appendChild(a);
   a.click();
   a.remove();
@@ -235,7 +235,7 @@ export function initQuoteForm(announcer) {
     const notes = eventNotes?.value?.trim();
     const selectedGenres = genreChecks.filter((c) => c.checked).map((c) => c.value);
 
-    let msg = `Hola Show Rumba Latina (Jesús "Beto" Rojas Ochoa),\n`;
+    let msg = `Hola Show Rumba Latina (Jesús Alberto Rojas Ochoa),\n`;
     msg += `Mi nombre es ${name}. Solicito cotización y disponibilidad para mi evento:\n\n`;
     msg += `• Tipo de Evento: ${type}\n`;
     msg += `• Formato Musical: ${format}\n`;
