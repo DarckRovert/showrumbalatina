@@ -24,7 +24,7 @@ Portal web de alto alcance, conversión y difusión audiovisual para la agrupaci
 * **Videoteca Lite (0 KB de iframe inicial):** 9 videos oficiales en vivo de `@BETOCANTARO4` abiertos bajo demanda en `<dialog closedby="any">` nativo con `referrerpolicy="strict-origin-when-cross-origin"`.
 * **Repertorio Accesible (`tabs`):** Pestañas en una sola fila con `focusgroup="tablist nomemory"`, bordes difuminados por scroll, paneles `hidden="until-found"` con `beforematch` y fallback de teclado para Safari/Firefox.
 * **Cotizador Inteligente & Kit Viral:** Fecha mínima en zona horaria `America/Lima`, formato `es-PE`, validación `:user-invalid` sincronizada con `aria-invalid`, descarga de contacto `.vcf` (vCard), botón Web Share y Código QR SVG/PNG imprimible (`errorCorrectionLevel: 'H'`).
-* **SEO Técnico:** Triple bloque JSON-LD (`MusicGroup`, `FAQPage`, `VideoObject`), `robots.txt`, `sitemap.xml`, `manifest.webmanifest`, iconos PWA (`180/192/512`) y `404.html` seguro.
+* **SEO Técnico:** Triple bloque JSON-LD (`MusicGroup`, `FAQPage`, `VideoObject`), `og-image.jpg` (< 300 KB para WhatsApp/Facebook), `robots.txt`, `sitemap.xml`, `manifest.webmanifest`, iconos PWA (`180/192/512`) y `404.html` seguro.
 * **Soberanía Anti-Billing ($0.00):** Sin `.github/workflows/`; compilación local en CPU y despliegue directo por CLI.
 
 ---

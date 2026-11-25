@@ -13,7 +13,10 @@ export function initRepertoireTabs() {
 
   if (!supportsFocusGroup) {
     tablist.setAttribute('role', 'tablist');
-    tabs.forEach((t) => t.setAttribute('role', 'tab'));
+    tabs.forEach((t) => {
+      t.setAttribute('role', 'tab');
+      t.tabIndex = t.getAttribute('aria-selected') === 'true' ? 0 : -1;
+    });
   }
 
   function activateTab(selectedTab, { moveFocus = false } = {}) {

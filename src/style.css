@@ -201,14 +201,10 @@ body {
 
 @supports (animation-timeline: scroll()) {
   .tablist-scroller {
-    mask-image:
-      linear-gradient(black, black),
-      linear-gradient(to right, black, transparent),
-      linear-gradient(to right, transparent, black);
-    mask-composite: exclude, add;
-    mask-position: 0 0, 0 0, 100% 0;
-    mask-size: 100% 100%, var(--fade-start) 100%, var(--fade-end) 100%;
-    mask-repeat: no-repeat;
+    mask:
+      linear-gradient(black, black) no-clip subtract,
+      linear-gradient(to right, black, transparent) 0 0 / var(--fade-start) 100% no-repeat no-clip,
+      linear-gradient(to right, transparent, black) 100% 0 / var(--fade-end) 100% no-repeat no-clip;
     animation: reveal-fade-start linear both, hide-fade-end linear both;
     animation-timeline: scroll(self inline);
     animation-range: 0 var(--fade-size), calc(100% - var(--fade-size)) 100%;
@@ -217,14 +213,10 @@ body {
 
 @supports not (animation-timeline: scroll()) {
   .tablist-scroller {
-    mask-image:
-      linear-gradient(black, black),
-      linear-gradient(to right, black, transparent),
-      linear-gradient(to right, transparent, black);
-    mask-composite: exclude, add;
-    mask-position: 0 0, 0 0, 100% 0;
-    mask-size: 100% 100%, var(--fade-start) 100%, var(--fade-end) 100%;
-    mask-repeat: no-repeat;
+    mask:
+      linear-gradient(black, black) no-clip subtract,
+      linear-gradient(to right, black, transparent) 0 0 / var(--fade-start) 100% no-repeat no-clip,
+      linear-gradient(to right, transparent, black) 100% 0 / var(--fade-end) 100% no-repeat no-clip;
     transition: --fade-start 0.2s ease, --fade-end 0.2s ease;
   }
 

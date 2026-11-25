@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
     videosGrid.innerHTML = '';
 
     const items = category === 'all'
-      ? videosData
+      ? videosData.filter((v) => !featuredVideo || v.id !== featuredVideo.id)
       : videosData.filter((v) => v.category === category);
 
     items.forEach((video) => {

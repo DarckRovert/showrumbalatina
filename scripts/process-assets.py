@@ -1,5 +1,6 @@
 import math
 import os
+import numpy as np
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageOps
 
 RAW_DIR = r"C:\Users\darck\.gemini\antigravity\brain\e66491fa-4726-4ed7-be07-e5bb542f0e39\scratch\raw_images"
@@ -21,32 +22,27 @@ def pick_font(candidates, size):
     return ImageFont.load_default()
 
 
-def apply_obsidian_gold_grade(img: Image.Image, vignette_strength: int = 85) -> Image.Image:
-    """Aplica gradación editorial coherente Obsidian & Warm Gold sobre fotografías abiertas."""
+def apply_obsidian_gold_grade(img: Image.Image, vignette_strength: int = 95) -> Image.Image:
+    """Aplica gradación editorial Obsidian & Warm Gold con viñeta radial elíptica suave (NumPy)."""
     graded = ImageEnhance.Contrast(img.convert("RGB")).enhance(1.10)
     graded = ImageEnhance.Color(graded).enhance(1.06)
 
-    # Baño cálido ámbar al 10% para cohesión nocturna con la paleta dorada
     amber_tint = Image.new("RGB", graded.size, (255, 200, 105))
-    graded = Image.blend(graded, amber_tint, 0.08).convert("RGBA")
+    graded = Image.blend(graded, amber_tint, 0.08)
 
-    # Viñeta suave en bordes
-    w, h = graded.size
-    vignette = Image.new("RGBA", (w, h), (0, 0, 0, 0))
-    vdraw = ImageDraw.Draw(vignette)
-    steps = 24
-    for i in range(steps):
-        frac = i / steps
-        alpha = int(vignette_strength * (1.0 - frac) ** 2)
-        inset_x = int((w * 0.14) * frac)
-        inset_y = int((h * 0.14) * frac)
-        vdraw.rectangle(
-            [inset_x, inset_y, w - inset_x, h - inset_y],
-            outline=(8, 8, 14, alpha),
-            width=max(2, int(min(w, h) * 0.018)),
-        )
+    arr = np.asarray(graded, dtype=np.float32)
+    h, w = arr.shape[:2]
+    yy, xx = np.ogrid[:h, :w]
+    nx = (xx - (w - 1) / 2.0) / ((w - 1) / 2.0)
+    ny = (yy - (h - 1) / 2.0) / ((h - 1) / 2.0)
+    dist = np.sqrt(nx * nx + ny * ny)
+    # Sin oscurecer el centro (dist <= 0.55); caída suave hacia las esquinas
+    factor = np.clip((dist - 0.55) / 0.85, 0.0, 1.0) ** 2.2
+    strength = vignette_strength / 255.0
+    mask = (1.0 - factor * strength)[..., None]
+    arr = arr * mask + np.array([8.0, 8.0, 14.0], dtype=np.float32) * (1.0 - mask)
 
-    return Image.alpha_composite(graded, vignette).convert("RGB")
+    return Image.fromarray(np.clip(arr, 0, 255).astype(np.uint8), mode="RGB")
 
 
 def save_multi_format(img: Image.Image, base_path_no_ext: str):
@@ -60,7 +56,7 @@ def process_stage_images():
     hero_raw = Image.open(os.path.join(RAW_DIR, "hero-stage.jpg")).convert("RGB")
     hero_1600 = apply_obsidian_gold_grade(
         ImageOps.fit(hero_raw, (1600, 900), method=Image.Resampling.LANCZOS, centering=(0.55, 0.45)),
-        vignette_strength=110,
+        vignette_strength=115,
     )
     hero_800 = hero_1600.resize((800, 450), Image.Resampling.LANCZOS)
     save_multi_format(hero_1600, os.path.join(OUT_IMG_DIR, "hero-stage-1600"))
@@ -71,7 +67,7 @@ def process_stage_images():
         raw = Image.open(os.path.join(RAW_DIR, f"{name}.jpg")).convert("RGB")
         fitted = apply_obsidian_gold_grade(
             ImageOps.fit(raw, (800, 600), method=Image.Resampling.LANCZOS, centering=(0.5, 0.5)),
-            vignette_strength=90,
+            vignette_strength=95,
         )
         save_multi_format(fitted, os.path.join(OUT_IMG_DIR, name))
         print(f"[OK] {name} AVIF/WebP/JPG")
@@ -83,7 +79,7 @@ def generate_og_image(hero_raw: Image.Image):
     width, height = 1200, 630
     bg = apply_obsidian_gold_grade(
         ImageOps.fit(hero_raw, (width, height), method=Image.Resampling.LANCZOS, centering=(0.55, 0.45)),
-        vignette_strength=120,
+        vignette_strength=125,
     ).convert("RGBA")
 
     overlay = Image.new("RGBA", (width, height), (0, 0, 0, 0))
@@ -141,9 +137,16 @@ def generate_og_image(hero_raw: Image.Image):
         shadow_offset=(0, 2),
     )
 
-    og_path = os.path.join(OUT_IMG_DIR, "og-image.png")
-    composed.convert("RGB").save(og_path, format="PNG", optimize=True)
+    og_path = os.path.join(OUT_IMG_DIR, "og-image.jpg")
+    composed.convert("RGB").save(og_path, format="JPEG", quality=84, optimize=True, progressive=True)
     print(f"[OK] {og_path} ({os.path.getsize(og_path)} bytes)")
+
+    # Eliminar archivos obsoletos si existen
+    for obsolete in ["og-image.png", ".gitkeep"]:
+        p = os.path.join(OUT_IMG_DIR, obsolete)
+        if os.path.exists(p):
+            os.remove(p)
+            print(f"[DEL] Eliminado obsoleto {p}")
 
 
 def generate_pwa_icons():
