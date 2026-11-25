@@ -24,27 +24,13 @@ export default {
           surface: '#12121c',
           card: '#1a1a2b',
           border: '#2a2a40',
-          accent: '#e11d48', // pasión latina
+          accent: '#e11d48',
         }
       },
       fontFamily: {
-        sans: ['Outfit', 'Montserrat', 'sans-serif'],
-        display: ['Cabinet Grotesk', 'Playfair Display', 'serif'],
+        sans: ['Outfit', 'system-ui', 'sans-serif'],
+        display: ['Playfair Display', 'Georgia', 'serif'],
       },
-      animation: {
-        'pulse-glow': 'pulseGlow 2.5s infinite',
-        'float': 'float 3s ease-in-out infinite',
-      },
-      keyframes: {
-        pulseGlow: {
-          '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
-          '50%': { opacity: '0.8', transform: 'scale(1.05)' },
-        },
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-8px)' },
-        }
-      }
     },
   },
   plugins: [],

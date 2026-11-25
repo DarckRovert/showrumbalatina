@@ -1,50 +1,66 @@
 [
   {
     "id": "matrimonios",
-    "title": "Bodas y Matrimonios de Ensueño",
+    "title": "Matrimonios y Bodas de Gala",
     "badge": "Más Solicitado",
-    "description": "Protocolo completo desde el ingreso de novios, vals ceremonial, ambientación musical y show bailable en vivo hasta el amanecer.",
+    "image": "event-wedding",
+    "imageAlt": "Salón elegante de matrimonio nocturno con iluminación dorada y escenario musical en vivo",
+    "eventTypeValue": "Matrimonio / Boda",
+    "duration": "Show por bloques o jornada completa",
+    "description": "Acompañamiento integral desde el protocolo y vals ceremonial hasta el baile principal y santiago tradicional huancaíno sin pausas.",
     "features": [
-      "Protocolo y Vals en Vivo",
-      "Animación profesional elegante",
-      "Repertorio adaptado a los novios",
-      "Show de Hora Loca interactiva"
+      "Protocolo, brindis y vals nupcial a pedido",
+      "Repertorio variado para todas las edades",
+      "Sonido nítido en salón o local campestre",
+      "Bloque de animación y hora loca elegante"
     ]
   },
   {
     "id": "quinceaneros",
-    "title": "Quinceañeros & Fiestas de Promoción",
-    "badge": "Tendencia",
-    "description": "Energía desbordante para las quinceañeras y jóvenes. Mezcla perfecta de cumbias modernas, salsa, rock y hora loca con cotillón.",
+    "title": "Quinceañeros & Promociones",
+    "badge": "Energía Total",
+    "image": "event-quince",
+    "imageAlt": "Celebración nocturna de quinceañero con luces escénicas doradas y magenta sobre la pista",
+    "eventTypeValue": "Quinceañero",
+    "duration": "Adaptado al cronograma de la fiesta",
+    "description": "Show moderno que combina música juvenil, cumbia actual, salsa, rock latino y momentos protocolares para la quinceañera e invitados.",
     "features": [
-      "Coreografías y animación dinámica",
-      "Efectos visuales e iluminación",
-      "DJ complementario en pausas",
-      "Música del momento y clásicos"
+      "Ingreso, vals y música seleccionada a gusto",
+      "Iluminación escénica dinámica de alto impacto",
+      "Animación participativa en tarima",
+      "Continuidad musical en intervalos"
     ]
   },
   {
     "id": "patronales",
     "title": "Fiestas Patronales & Aniversarios",
     "badge": "Tradición Viva",
-    "description": "Presentaciones multitudinarias con sonido de alta potencia, huaynos, santiagos y cumbias para mayordomos y comités del centro del país.",
+    "image": "event-patronal",
+    "imageAlt": "Gran escenario nocturno de fiesta patronal al aire libre en plaza andina iluminada",
+    "eventTypeValue": "Fiesta Patronal / Aniversario",
+    "duration": "Presentaciones extensas y serenatas",
+    "description": "Potencia sonora para plazas, estadios y locales abiertos. Especialistas en santiago, huaynos, cumbias de oro y jornadas de larga duración.",
     "features": [
-      "Sonido para exteriores y plazas",
-      "Santiago y huayno tradicional",
-      "Puntualidad y cumplimiento garantizado",
-      "Show continuo de alta resistencia"
+      "Refuerzo sonoro profesional para exteriores",
+      "Santiago, huayno y cumbia para mayordomías",
+      "Puntualidad estricta y compromiso formal",
+      "Músicos y voces experimentadas en vivo"
     ]
   },
   {
     "id": "corporativos",
-    "title": "Eventos Corporativos & Empresas",
+    "title": "Corporativos, Cenas & Serenatas",
     "badge": "Empresarial",
-    "description": "Cenas de gala, aniversarios institucionales y fiestas de fin de año con nivel sonoro controlado y máxima etiqueta.",
+    "image": "event-corporate",
+    "imageAlt": "Gala corporativa nocturna con iluminación ámbar cálida y escenario profesional",
+    "eventTypeValue": "Evento Corporativo / Institucional",
+    "duration": "Formato serenata o gala bailable",
+    "description": "Aniversarios institucionales, cenas de fin de año y homenajes especiales. Desde formato bolero/acústico hasta orquesta bailable completa.",
     "features": [
-      "Facturación y formalidad",
-      "Música ambiental y bailable",
-      "Maestro de ceremonias opcional",
-      "Equipamiento estético y sobrio"
+      "Volumen calibrado para cenas y ceremonias",
+      "Boleros y clásicos del recuerdo en vivo",
+      "Presentación de etiqueta acorde al evento",
+      "Coordinación directa con el organizador"
     ]
   }
 ]

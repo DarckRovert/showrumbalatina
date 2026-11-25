@@ -1,50 +1,67 @@
 [
   {
     "category": "cumbia",
-    "title": "Cumbias de Antología y Éxitos de Oro",
-    "description": "Grandes clásicos tropicales, Grupo 5, Agua Marina, Armonía 10, Los Shapis y cumbias que hacen vibrar a todas las generaciones.",
-    "icon": "disc",
+    "label": "Cumbia Tropical",
+    "title": "Cumbias de Antología y Éxitos del Momento",
+    "description": "El corazón bailable de cada fiesta: cumbia norteña, cumbia peruana clásica, cumbia sureña y los éxitos actuales que unen a todas las edades en la pista.",
+    "idealFor": "Pista principal, recepciones y cierres festivos",
     "hits": [
-      "Motor y Motivo / Te Vas",
-      "Tu Amor Fue Una Mentira",
-      "El Casorio / El Aguajal",
-      "Cervecita Blanca / Dios Mío Haz que me Quiera"
+      "Mix Cumbias de Antología y del Recuerdo",
+      "Motor y Motivo / Te Vas / El Casorio",
+      "Tu Amor Fue Una Mentira / El Aguajal",
+      "Éxitos Bailables del Momento"
     ]
   },
   {
     "category": "salsa",
-    "title": "Salsa & Merengue Explosivo",
-    "description": "Salsa dura, romántica y merengues de alta energía para mantener la pista de baile llena toda la noche.",
-    "icon": "flame",
+    "label": "Salsa & Merengue",
+    "title": "Salsa Dura, Romántica & Merengue Explosivo",
+    "description": "Bloques de ritmo caribeño con energía constante y animación interactiva para elevar la temperatura de la celebración sin pausas.",
+    "idealFor": "Matrimonios, cumpleaños y fiestas corporativas",
     "hits": [
-      "Mix Guarachas & Fania All Stars",
+      "Mix Guarachas & Clásicos de la Salsa",
       "La Rebelión / Cali Pachanguero",
-      "El Tiburón / Kulikitaka",
-      "La Bilirrubina / Procura"
+      "Merengues Clásicos de Alta Energía",
+      "Salsa Romántica y Bailable para Parejas"
     ]
   },
   {
     "category": "folclore",
-    "title": "Huaynos, Santiago & Folclore del Centro",
-    "description": "La auténtica identidad huancaína y del Valle del Mantaro. Santiago zapateado, huaylas y mulizas con fuerza e instrumentación viva.",
-    "icon": "music-2",
+    "label": "Santiago & Folclore",
+    "title": "Huaynos, Santiago y Folclore del Valle del Mantaro",
+    "description": "Nuestra identidad huancaína en vivo con fuerza y respeto a la tradición: santiago zapateado, huaylas, tunantada y huaynos para celebrar con orgullo.",
+    "idealFor": "Fiestas patronales, palpas, matrimonios huancas y aniversarios",
     "hits": [
-      "Santiago Huancaíno Tradicional",
-      "Huaylas Moderno con Fuerza",
-      "Mix Chuto / Tunantada",
-      "Cantos del Mantaro"
+      "Santiago Tradicional del Valle del Mantaro",
+      "Huaylas Moderno y Clásico con Fuerza",
+      "Mix Tunantada y Mulizas del Centro",
+      "Huaynos Populares para Zapateo"
     ]
   },
   {
     "category": "rock",
-    "title": "Rock en Español & Fiesta Variada",
-    "description": "Clásicos del rock ochentero y noventero, pop latino y música del momento para el momento cumbre del evento.",
-    "icon": "zap",
+    "label": "Rock & Hora Loca",
+    "title": "Rock en Español, Pop Latino & Hora Loca",
+    "description": "Clásicos inolvidables de los 80 y 90 en español junto a dinámicos bloques de fiesta variada y hora loca para mantener la euforia hasta el final.",
+    "idealFor": "Quinceañeros, promociones y hora loca nocturna",
     "hits": [
-      "Mix Soda Stereo / Enanitos Verdes",
+      "Mix Rock Latino Clásico (Soda / Enanitos)",
       "Lamento Boliviano / De Música Ligera",
-      "Mix Hombres G / Vilma Palma",
-      "Hora Loca Temática con Animación"
+      "Pop Latino y Éxitos Ochenteros / Noventeros",
+      "Bloque Interactivo de Hora Loca en Vivo"
+    ]
+  },
+  {
+    "category": "boleros",
+    "label": "Boleros & Recuerdo",
+    "title": "Boleros, Vals y Clásicos del Recuerdo",
+    "description": "Interpretaciones románticas en la voz de Jesús 'Beto' Rojas Ochoa, pensadas para ceremonias, brindis, cenas de gala, serenatas y homenajes familiares.",
+    "idealFor": "Serenatas, cenas, bodas de plata/oro y protocolo",
+    "hits": [
+      "Camino del Puente (Bolero)",
+      "Intruso Corazón (Clásico del Recuerdo)",
+      "Loco por ti (Interpretación en vivo)",
+      "Mis 18 Años / Y Va Pasando la Vida"
     ]
   }
 ]

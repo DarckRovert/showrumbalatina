@@ -2,48 +2,116 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,400&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+/* ==========================================================================
+   Propiedades registradas para animación de máscaras en tabs scrolleables
+   ========================================================================== */
+@property --fade-start {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --fade-end {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
 
 html {
   scroll-behavior: smooth;
-  font-family: 'Outfit', 'Montserrat', sans-serif;
+  font-family: 'Outfit', system-ui, sans-serif;
   color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
   background-color: #0a0a0f;
   color: #f1f5f9;
   overflow-x: hidden;
+  background-image:
+    radial-gradient(650px circle at 12% 8%, rgba(229, 165, 6, 0.08), transparent 65%),
+    radial-gradient(700px circle at 88% 35%, rgba(225, 29, 72, 0.07), transparent 65%),
+    radial-gradient(600px circle at 50% 80%, rgba(253, 192, 18, 0.05), transparent 70%);
 }
 
-/* Custom scrollbar */
+/* ==========================================================================
+   Accesibilidad: Skip Link y Visually Hidden (Live Region)
+   ========================================================================== */
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  background: #fed542;
+  color: #0a0a0f;
+  font-weight: 800;
+  font-size: 0.875rem;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.skip-link:focus-visible {
+  top: 1rem;
+  outline: 3px solid #ffffff;
+  outline-offset: 2px;
+}
+
+.visually-hidden:where(:not(:focus-within, :active)) {
+  position: absolute !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+/* ==========================================================================
+   Scrollbar personalizado
+   ========================================================================== */
 ::-webkit-scrollbar {
   width: 8px;
+  height: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: #0a0a0f;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #2a2a40;
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #fdc012;
 }
 
-/* Glassmorphism & Neon */
+/* ==========================================================================
+   Superficies y botones de marca
+   ========================================================================== */
 .glass-nav {
-  background: rgba(10, 10, 15, 0.85);
+  background: rgba(10, 10, 15, 0.88);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(253, 192, 18, 0.15);
+  border-bottom: 1px solid rgba(253, 192, 18, 0.16);
 }
 
 .glass-card {
-  background: rgba(18, 18, 28, 0.7);
+  background: rgba(18, 18, 28, 0.78);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .glass-card:hover {
@@ -51,17 +119,18 @@ body {
 }
 
 .gold-gradient-text {
-  background: linear-gradient(135deg, #fff2cc 0%, #fed542 50%, #e5a506 100%);
+  background: linear-gradient(135deg, #fff5d6 0%, #fed542 52%, #e5a506 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .gold-gradient-btn {
-  background: linear-gradient(135deg, #fed542 0%, #e5a506 50%, #b87903 100%);
+  background: linear-gradient(135deg, #fed542 0%, #e5a506 55%, #b87903 100%);
   color: #0a0a0f;
-  font-weight: 700;
+  font-weight: 800;
   box-shadow: 0 4px 20px rgba(229, 165, 6, 0.35);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 0.2s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
 .gold-gradient-btn:hover {
@@ -69,10 +138,357 @@ body {
   transform: translateY(-2px);
 }
 
-.hero-glow {
+@media (prefers-reduced-motion: reduce) {
+  .gold-gradient-btn:hover,
+  .glass-card:hover {
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   Scroll-Driven Reveals (Compositor only + prefers-reduced-motion)
+   ========================================================================== */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    .reveal-item {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 32%;
+    }
+  }
+}
+
+.reveal-js-pending {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.reveal-js-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ==========================================================================
+   Repertorio: Tabs en una sola fila con bordes difuminados y panel grid
+   ========================================================================== */
+.tablist-scroller {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  overflow-x: auto;
+  scroll-snap-type: inline proximity;
+  scroll-padding-inline: 2.5rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  --fade-size: 2.5rem;
+}
+
+.tablist-scroller::-webkit-scrollbar {
+  display: none;
+}
+
+@supports (animation-timeline: scroll()) {
+  .tablist-scroller {
+    mask-image:
+      linear-gradient(black, black),
+      linear-gradient(to right, black, transparent),
+      linear-gradient(to right, transparent, black);
+    mask-composite: exclude, add;
+    mask-position: 0 0, 0 0, 100% 0;
+    mask-size: 100% 100%, var(--fade-start) 100%, var(--fade-end) 100%;
+    mask-repeat: no-repeat;
+    animation: reveal-fade-start linear both, hide-fade-end linear both;
+    animation-timeline: scroll(self inline);
+    animation-range: 0 var(--fade-size), calc(100% - var(--fade-size)) 100%;
+  }
+}
+
+@supports not (animation-timeline: scroll()) {
+  .tablist-scroller {
+    mask-image:
+      linear-gradient(black, black),
+      linear-gradient(to right, black, transparent),
+      linear-gradient(to right, transparent, black);
+    mask-composite: exclude, add;
+    mask-position: 0 0, 0 0, 100% 0;
+    mask-size: 100% 100%, var(--fade-start) 100%, var(--fade-end) 100%;
+    mask-repeat: no-repeat;
+    transition: --fade-start 0.2s ease, --fade-end 0.2s ease;
+  }
+
+  .tablist-scroller.more-start {
+    --fade-start: var(--fade-size);
+  }
+
+  .tablist-scroller.more-end {
+    --fade-end: var(--fade-size);
+  }
+}
+
+@keyframes reveal-fade-start {
+  to {
+    --fade-start: var(--fade-size);
+  }
+}
+
+@keyframes hide-fade-end {
+  from {
+    --fade-end: var(--fade-size);
+  }
+}
+
+.rep-tab {
+  position: relative;
+  flex: none;
+  scroll-snap-align: start;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.75rem 0.75rem 0.25rem 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  background: rgba(18, 18, 28, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.rep-tab:hover {
+  color: #fef5c7;
+  border-color: rgba(253, 192, 18, 0.35);
+}
+
+.rep-tab:focus-visible {
+  outline: 2px solid #fed542;
+  outline-offset: 2px;
+}
+
+.rep-tab[aria-selected="true"] {
+  color: #fed542;
+  background: rgba(253, 192, 18, 0.12);
+  border-color: rgba(253, 192, 18, 0.45);
+}
+
+.rep-tab[aria-selected="true"]::after {
+  content: "";
   position: absolute;
-  border-radius: 50%;
-  filter: blur(120px);
+  inset: auto 0 0;
+  border-block-end: 3px solid #fdc012;
+}
+
+.tabpanels-stack {
+  display: grid;
+}
+
+.rep-tabpanel {
+  grid-area: 1 / 1;
+}
+
+.rep-tabpanel[hidden] {
   pointer-events: none;
-  z-index: 0;
+}
+
+/* ==========================================================================
+   Native <dialog> Modals (Video Lightbox y Modal QR)
+   ========================================================================== */
+dialog:modal {
+  overscroll-behavior: contain;
+  margin: auto;
+  max-width: min(94vw, 58rem);
+  max-height: 92dvh;
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: #f1f5f9;
+}
+
+dialog::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+  background: rgba(5, 5, 10, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  dialog[open] {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.22s ease-out, transform 0.22s ease-out, display 0.22s ease-out, overlay 0.22s ease-out;
+    transition-behavior: allow-discrete;
+  }
+
+  @starting-style {
+    dialog[open] {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+  }
+}
+
+/* ==========================================================================
+   Native <details> FAQ Acordeón
+   ========================================================================== */
+.faq-item {
+  border-radius: 1rem;
+  background: rgba(18, 18, 28, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.2s ease;
+}
+
+.faq-item[open],
+.faq-item:hover {
+  border-color: rgba(253, 192, 18, 0.4);
+}
+
+.faq-summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.15rem 1.35rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #f8fafc;
+  cursor: pointer;
+}
+
+.faq-summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-summary:focus-visible {
+  outline: 2px solid #fed542;
+  outline-offset: -2px;
+  border-radius: 1rem;
+}
+
+.faq-summary::before {
+  content: "";
+  inline-size: 1.15em;
+  block-size: 1.15em;
+  flex-shrink: 0;
+  background-color: #fed542;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat center / contain;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat center / contain;
+  rotate: -90deg;
+}
+
+.faq-item[open] > .faq-summary::before {
+  rotate: 0deg;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .faq-summary::before {
+    transition: rotate 0.2s ease;
+  }
+}
+
+.faq-item::details-content {
+  interpolate-size: allow-keywords;
+  overflow: clip;
+  contain: layout;
+}
+
+.faq-item:not([open])::details-content {
+  block-size: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .faq-item::details-content {
+    transition: block-size 0.28s ease-in-out, content-visibility 0.28s ease-in-out;
+    transition-behavior: allow-discrete;
+  }
+}
+
+[data-faq-toggle][aria-expanded="true"] .label-expand {
+  display: none;
+}
+
+[data-faq-toggle][aria-expanded="false"] .label-collapse {
+  display: none;
+}
+
+/* ==========================================================================
+   Validación de Formulario Post-Interacción (:user-invalid / :user-valid)
+   ========================================================================== */
+.field-input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: 0.75rem;
+  background-color: #0f172a;
+  border: 1px solid #334155;
+  color: #ffffff;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field-input::placeholder {
+  color: #64748b;
+}
+
+.field-input:focus {
+  border-color: #fdc012;
+  box-shadow: 0 0 0 2px rgba(253, 192, 18, 0.25);
+}
+
+.error-msg {
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+  color: #fda4af;
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+:is(input, select, textarea).field-input:is(:user-invalid, .user-invalid-fallback) {
+  border-color: #f43f5e;
+  background-color: rgba(136, 19, 55, 0.22);
+}
+
+:is(input, select, textarea).field-input:is(:user-invalid, .user-invalid-fallback) + .error-msg {
+  display: flex;
+}
+
+:is(input, select, textarea).field-input:is(:user-valid, .user-valid-fallback) {
+  border-color: #10b981;
+}
+
+/* ==========================================================================
+   Botón flotante WhatsApp con pulso acotado a reduced-motion
+   ========================================================================== */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  75%, 100% {
+    transform: scale(1.65);
+    opacity: 0;
+  }
+}
+
+.wa-pulse-dot {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .wa-pulse-dot {
+    display: inline-flex;
+    animation: pulse-ring 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
 }
