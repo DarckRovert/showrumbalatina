@@ -33,7 +33,7 @@ function createVCardBlob() {
     'TEL;TYPE=CELL,VOICE,WHATSAPP:+51964966904',
     'ADR;TYPE=WORK:;;Huancayo;Junín;;Perú',
     'URL:https://showrumbalatina.github.io/',
-    'NOTE:Música 100% variada: Cumbia, Salsa, Santiago, Rock y Boleros. Facebook: /showrumbalatinahuancayo/ | Instagram: @showrumbalatina | YouTube: @BETOCANTARO4',
+    'NOTE:Reconocidos por el Congreso de la República (2026). Música 100% variada: Cumbia, Salsa, Santiago, Rock y Boleros. Facebook Agrupación: /showrumbalatinahuancayo/ | Facebook Artista: /showrumbalatina/ | Instagram: @showrumbalatina | YouTube: @BETOCANTARO4',
     'END:VCARD',
   ].join('\r\n');
   return new Blob([vcard], { type: 'text/vcard;charset=utf-8' });

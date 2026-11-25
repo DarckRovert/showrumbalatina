@@ -45,7 +45,7 @@ def main() -> int:
         "dist/images/hero-stage-800.webp",
         "dist/images/hero-stage-800.jpg",
     ]
-    for ev in ["event-wedding", "event-quince", "event-patronal", "event-corporate"]:
+    for ev in ["event-wedding", "event-quince", "event-patronal", "event-corporate", "diploma-congreso"]:
         for ext in ["avif", "webp", "jpg"]:
             required_files.append(f"dist/images/{ev}.{ext}")
 
@@ -75,11 +75,20 @@ def main() -> int:
     check("og-image.jpg" in html and "og-image.png" not in html, "OpenGraph apunta a og-image.jpg (sin referencias a og-image.png)")
     check('pattern=".*\\S.*\\S.*"' in html, "Validación anti-espacios (pattern) presente en formulario")
     check("https://www.youtube.com/@BETOCANTARO4" in html, "Canal oficial YouTube @BETOCANTARO4 incluido")
+    check("https://www.facebook.com/showrumbalatina/" in html, "Página oficial Facebook Artista /showrumbalatina/ incluida")
+    check("Congreso de la República" in html_unescaped, "Reconocimiento del Congreso de la República presente en HTML")
+    check('"Beto"' not in html_unescaped and "'Beto'" not in html_unescaped and "“Beto”" not in html_unescaped, "Nombre formal completo sin apodo 'Beto' entrecomillado")
 
     hero_imgs = re.findall(r'<img\b[^>]*fetchpriority="high"[^>]*>', html, re.I)
     check(len(hero_imgs) == 1, f"Exactamente 1 imagen hero con fetchpriority='high' (encontradas: {len(hero_imgs)})")
     if hero_imgs:
         check('loading="lazy"' not in hero_imgs[0], "Imagen hero LCP NO tiene loading='lazy'")
+
+    diploma_imgs = re.findall(r'<img\b[^>]*diploma-congreso[^>]*>', html, re.I)
+    check(len(diploma_imgs) == 2, f"Exactamente 2 imágenes diploma-congreso (sección + modal; encontradas: {len(diploma_imgs)})")
+    if diploma_imgs:
+        check(all('loading="lazy"' in img for img in diploma_imgs), "Imágenes diploma-congreso usan loading='lazy'")
+        check(all('fetchpriority="high"' not in img for img in diploma_imgs), "Imágenes diploma-congreso no compiten con LCP hero")
 
     blank_links = re.findall(r'<a\b[^>]*target="_blank"[^>]*>', html, re.I)
     missing_rel = [a for a in blank_links if 'rel="noopener noreferrer"' not in a]
@@ -91,9 +100,9 @@ def main() -> int:
 
     dialogs = re.findall(r'<dialog\b[^>]*>', html, re.I)
     bad_dialogs = [d for d in dialogs if "role=" in d.lower() or "aria-modal" in d.lower()]
-    check(len(dialogs) == 2 and len(bad_dialogs) == 0, "Modales <dialog> nativos sin role='dialog' ni aria-modal redundantes")
+    check(len(dialogs) == 3 and len(bad_dialogs) == 0, f"Modales <dialog> nativos ({len(dialogs)}/3) sin role='dialog' ni aria-modal redundantes")
 
-    # Verificar todos los bloques JSON-LD válidos y capturar FAQPage
+    # Verificar todos los bloques JSON-LD válidos y capturar FAQPage y MusicGroup
     ld_blocks = re.findall(r'<script type="application/ld\+json">(.*?)</script>', html, re.S)
     check(len(ld_blocks) >= 3, f"Al menos 3 bloques JSON-LD presentes ({len(ld_blocks)})")
     faq_ld_questions = set()
@@ -104,6 +113,11 @@ def main() -> int:
             if parsed.get("@type") == "FAQPage":
                 for q_obj in parsed.get("mainEntity", []):
                     faq_ld_questions.add(q_obj.get("name", ""))
+            elif parsed.get("@type") == "MusicGroup":
+                check(bool(parsed.get("award")), "MusicGroup JSON-LD incluye propiedad 'award'")
+                same_as = parsed.get("sameAs", [])
+                check("https://www.facebook.com/showrumbalatina/" in same_as, "MusicGroup sameAs incluye Facebook Artista /showrumbalatina/")
+                check("https://www.facebook.com/showrumbalatinahuancayo/" in same_as, "MusicGroup sameAs incluye Facebook Agrupación")
         except Exception as exc:
             check(False, f"JSON-LD bloque #{idx} inválido: {exc}")
 

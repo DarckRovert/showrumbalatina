@@ -1,6 +1,7 @@
 export function initDialogs() {
   const videoDialog = document.getElementById('video-modal');
   const qrDialog = document.getElementById('qr-modal');
+  const diplomaDialog = document.getElementById('diploma-modal');
   const playerWrap = document.getElementById('video-modal-player');
   const titleEl = document.getElementById('video-modal-title');
   const metaEl = document.getElementById('video-modal-meta');
@@ -71,6 +72,14 @@ export function initDialogs() {
     btn.addEventListener('click', () => {
       if (qrDialog) {
         qrDialog.showModal();
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-open-diploma]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (diplomaDialog) {
+        diplomaDialog.showModal();
       }
     });
   });

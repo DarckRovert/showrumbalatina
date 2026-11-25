@@ -1,9 +1,11 @@
+import argparse
 import math
 import os
 import numpy as np
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageOps
 
 RAW_DIR = r"C:\Users\darck\.gemini\antigravity\brain\e66491fa-4726-4ed7-be07-e5bb542f0e39\scratch\raw_images"
+DIPLOMA_RAW_PATH = r"C:\Users\darck\.gemini\antigravity\brain\e66491fa-4726-4ed7-be07-e5bb542f0e39\.user_uploaded\media_1795623843100_300ce91a.jpg"
 OUT_IMG_DIR = os.path.abspath("public/images")
 OUT_PUB_DIR = os.path.abspath("public")
 FONTS_DIR = r"C:\Windows\Fonts"
@@ -196,10 +198,53 @@ def generate_pwa_icons():
         print(f"[OK] {dest} ({os.path.getsize(dest)} bytes)")
 
 
+def process_diploma_image():
+    """Optimiza el diploma institucional preservando resolución nativa, contraste y legibilidad."""
+    if not os.path.isfile(DIPLOMA_RAW_PATH):
+        raise FileNotFoundError(f"No se encontró la imagen original del diploma: {DIPLOMA_RAW_PATH}")
+
+    with Image.open(DIPLOMA_RAW_PATH) as opened:
+        img = ImageOps.exif_transpose(opened).convert("RGB")
+
+    # Mejora sutil sin recortar bordes ni teñir el documento ni el sello oficial
+    img = ImageEnhance.Contrast(img).enhance(1.04)
+    img = ImageEnhance.Sharpness(img).enhance(1.06)
+
+    base_path = os.path.join(OUT_IMG_DIR, "diploma-congreso")
+    avif_path = f"{base_path}.avif"
+    webp_path = f"{base_path}.webp"
+    jpg_path = f"{base_path}.jpg"
+
+    img.save(avif_path, format="AVIF", quality=72)
+    img.save(webp_path, format="WEBP", quality=88, method=6)
+    img.save(jpg_path, format="JPEG", quality=88, optimize=True, progressive=True)
+
+    w, h = img.size
+    print(
+        f"[OK] diploma-congreso ({w}x{h}) -> "
+        f"AVIF {os.path.getsize(avif_path)} B | "
+        f"WebP {os.path.getsize(webp_path)} B | "
+        f"JPG {os.path.getsize(jpg_path)} B"
+    )
+    return img.size
+
+
 def main():
-    hero_raw = process_stage_images()
-    generate_og_image(hero_raw)
+    parser = argparse.ArgumentParser(description="Procesa activos gráficos para Show Rumba Latina.")
+    parser.add_argument("--diploma-only", action="store_true", help="Procesa únicamente el diploma del Congreso.")
+    args = parser.parse_args()
+
+    if args.diploma_only:
+        process_diploma_image()
+        print("DIPLOMA ASSET PROCESSED SUCCESSFULLY")
+        return
+
+    if os.path.isdir(RAW_DIR):
+        hero_raw = process_stage_images()
+        generate_og_image(hero_raw)
     generate_pwa_icons()
+    if os.path.isfile(DIPLOMA_RAW_PATH):
+        process_diploma_image()
     print("ALL MEDIA ASSETS PROCESSED SUCCESSFULLY")
 
 
