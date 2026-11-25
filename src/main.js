@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 3. Modales nativos <dialog> (Videoteca Lightbox + QR)
+  // 3. Modales nativos <dialog> (Videoteca Lightbox + QR + Diploma)
   const { openVideoModal } = initDialogs();
 
   // 4. Videoteca Oficial (9 videos de @BETOCANTARO4) con fachadas ligeras (0 KB iframe hasta clic)

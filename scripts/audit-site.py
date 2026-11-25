@@ -90,6 +90,15 @@ def main() -> int:
         check(all('loading="lazy"' in img for img in diploma_imgs), "Imágenes diploma-congreso usan loading='lazy'")
         check(all('fetchpriority="high"' not in img for img in diploma_imgs), "Imágenes diploma-congreso no compiten con LCP hero")
 
+    qr_imgs = re.findall(r'<img\b[^>]*qr-showrumbalatina\.svg[^>]*>', html, re.I)
+    check(len(qr_imgs) == 1 and 'fetchpriority="low"' in qr_imgs[0], "Imagen modal QR tiene fetchpriority='low'")
+
+    with open("index.html", "r", encoding="utf-8") as sf:
+        src_clean = re.sub(r'<!--.*?-->', '', sf.read(), flags=re.S)
+        src_clean = re.sub(r'<script type="application/ld\+json">.*?</script>', '', src_clean, flags=re.S)
+    bare_amps = [ln.strip() for ln in src_clean.splitlines() if " & " in ln]
+    check(len(bare_amps) == 0, f"Sin ampersands ' & ' sin escapar en index.html (encontrados: {len(bare_amps)})")
+
     blank_links = re.findall(r'<a\b[^>]*target="_blank"[^>]*>', html, re.I)
     missing_rel = [a for a in blank_links if 'rel="noopener noreferrer"' not in a]
     check(len(missing_rel) == 0, f"Todos los enlaces target='_blank' ({len(blank_links)}) tienen rel='noopener noreferrer'")
@@ -128,6 +137,7 @@ def main() -> int:
         with open(os.path.join("dist/assets", css_files[0]), "r", encoding="utf-8") as cf:
             css_txt = cf.read()
         check("no-clip subtract" in css_txt, "CSS compilado conserva mask ... no-clip subtract")
+        check("scroll-margin-top:5rem" in css_txt or "scroll-margin-top: 5rem" in css_txt, "CSS compilado define scroll-margin-top para header fijo")
 
     # 7. Verificar modules JS
     with open("src/modules/dialogs.js", "r", encoding="utf-8") as f:
