@@ -140,6 +140,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const clientName = document.getElementById('client-name');
   const eventType = document.getElementById('event-type');
   const eventDate = document.getElementById('event-date');
+  if (eventDate) {
+    // Bloquear selección de fechas pasadas
+    const today = new Date().toISOString().split('T')[0];
+    eventDate.min = today;
+  }
   const eventLoc = document.getElementById('event-location');
   const eventNotes = document.getElementById('event-notes');
   const previewEl = document.getElementById('message-preview');
@@ -186,7 +191,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const phone = '51964966904';
       const encodedMsg = encodeURIComponent(msg);
       const waUrl = `https://wa.me/${phone}?text=${encodedMsg}`;
-      window.open(waUrl, '_blank', 'noopener,noreferrer');
+      const newWin = window.open(waUrl, '_blank', 'noopener,noreferrer');
+      // Fallback resiliente si el navegador del móvil bloquea popups
+      if (!newWin || newWin.closed || typeof newWin.closed === 'undefined') {
+        window.location.href = waUrl;
+      }
     });
   }
 });
